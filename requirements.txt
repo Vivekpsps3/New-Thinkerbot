@@ -1,0 +1,14 @@
+transformers
+discord
+scipy
+spacy
+torch
+nltk
+ekphrasis
+openai
+diffusers
+google-generativeai
+pathlib
+iPython
+pillow
+accelerate
