@@ -7,12 +7,14 @@ import os
 #local imports
 from src import sentiment as Sentiment
 from src import chatbot as Chatbot
-from src import league as League
 
 intents = discord.Intents.default()
 intents.message_content = True
 bot = commands.Bot(command_prefix='-', intents=intents)
 
+#Gemini Instance
+global gemini
+gemini = Chatbot.gemini()
 
 #Helper functions
 async def discord_output(ctx, output):
@@ -23,17 +25,14 @@ async def discord_output(ctx, output):
         await ctx.send(output)
 
 #AI commands and functions
+
 #sentiment analysis command
 @bot.command(name='sentiment', help="Thinkerbot gives you the sentiment of the text")
 async def sentiment(ctx, *, text: str):
     response = Sentiment.get_sentiment(text)
     await ctx.send(response)
 
-
-#Gemini Commands
-global gemini
-gemini = Chatbot.gemini()
-
+#Gemini commands
 @bot.command(name = 'gemini', help = "Uses Gemini to come up with a response", category="ai_chat")
 async def bard(ctx, *, text: str):
     global gemini
@@ -87,17 +86,6 @@ async def eightball(ctx, *, question):
 @bot.command(name='ping', help="Checks the bot's ping")
 async def ping(ctx):
     await ctx.send(f'Pong! {round(bot.latency * 1000)}ms')
-
-# @bot.command(name='img', help="returns an AI generated image")
-# async def img(ctx, *, text: str):
-#     response = "The image is being generated. This model is extremely resource intensive!\nUse -getimg to load the last generated image\nPlease wait..."
-#     await ctx.send(response)
-    
-#     # Diffusion.context_wrapped_generate_image(text, ctx)
-
-#     #run the above function in a separate thread
-#     thread = Thread(target=Diffusion.generate_image, args=text)
-#     thread.start()
 
 with open("discord_token.env", "r") as f:
     DISCORD_TOKEN = f.read()

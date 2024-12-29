@@ -5,7 +5,9 @@ from scipy.special import softmax
 import nltk
 from ekphrasis.classes.tokenizer import SocialTokenizer
 import spacy
-#nltk.download('punkt')
+
+# Download the punkt tokenizer for sentence splitting
+nltk.download('punkt')
 
 #clause splitting code
 #https://subscription.packtpub.com/book/data/9781838987312/2/ch02lvl1sec13/splitting-sentences-into-clauses
@@ -100,7 +102,6 @@ def preprocess(text):
 
 
 def get_sentiment(text):
-    
     fin_output = text + "\nOverall sentiment + score: "
     if text[-1] not in ['.', '?', '!']:
         text += '.'

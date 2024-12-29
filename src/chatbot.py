@@ -1,11 +1,13 @@
 with open("gemini.env", "r") as f:
     gemini_api_key = f.read().strip()
 
+model_name = "gemini-2.0-flash-exp"
+
 class gemini():
     def __init__(self):
         import google.generativeai as genai
         genai.configure(api_key=gemini_api_key)
-        model = genai.GenerativeModel('gemini-1.5-flash')
+        model = genai.GenerativeModel(model_name)
         messages = [
                     {'role':'model',
                     'parts': ["You are a helpful Discord bot. You are here to help answer questions and provide information. Your name is Thinkerbot."]}
